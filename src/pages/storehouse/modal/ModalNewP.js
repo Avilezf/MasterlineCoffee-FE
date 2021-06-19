@@ -42,7 +42,18 @@ export default function Modal(props) {
                         <input className="" type="number" onChange={(e) => { setPrice(e.target.value); }} required />
                         <label>Ingresa la cantidad existente del producto:</label>
                         <input className="" type="number" onChange={(e) => { setQuantity(e.target.value); }} required />
-                        <label>Ingrese la categoria del producto:</label>
+                        <label>Selecciona categoria del producto:</label>
+                        {/* <input className=""> Seleccione caegoria</input> */}
+                        <details>
+                        <summary>Categorias</summary>
+                        <ul>
+                          <li>Item 1</li>
+                          <li>Item 2</li>
+                          <li>Item 3</li>
+                          <li>Item 4</li>
+                          <li>Item 5</li>
+                        </ul>
+                        </details>
                         <input className="" type="text" onChange={(e) => { setCategory(e.target.value); }} required />
                         <label>Ingrese la imagen del producto:</label>
                         <input className="" type="text" placeholder='link/url' onChange={(e) => { setImage(e.target.value); }} required />

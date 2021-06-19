@@ -64,6 +64,101 @@
   transform: rotateX(14deg);
   box-shadow: 0 2px 2px #e3e0f3;
 }
+ /* aqui comienza  a escribir carla los stylos del select  */
+details {
+	position: relative;
+	width: 250px;
+	margin-right: 1rem;
+}
+
+details[open] {
+	z-index: 1;
+}
+
+summary {
+	padding: 1rem;
+	cursor: pointer;
+	border-radius: 5px;
+	background-color: #8685ef;
+  color: #fff;
+}
+summary::-webkit-details-marker {
+	display: none;
+}
+details[open] summary:before {
+	content: '';
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+ul {
+	width: 100%;
+	background: #8685ef;
+	position: absolute;
+	top: calc(100% + .5rem);
+	left: 0;
+	padding: 1rem;
+	margin: 0;
+	box-sizing: border-box;
+	border-radius: 5px;
+	max-height: 200px;
+	overflow-y: auto;
+  text-align: center;
+}
+
+li {
+	margin: 0;
+	padding: 1rem 0;
+	border-bottom: 1px solid #ccc;
+  color: #fff;
+  list-style: none;
+}
+
+li:first-child {
+	padding-top: 0;
+}
+
+li:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+summary.radios {
+	counter-reset: radios;
+}
+
+input[type=radio] {
+	counter-increment: radios;
+	appearance: none;
+	display: none;
+}
+
+input[type=radio]:checked {
+	display: inline;
+}
+
+input[type=radio]:after {
+	content: attr(title);
+	display: inline;
+	font-size: 1rem;
+}
+
+ul.list {
+	counter-reset: labels;
+}
+
+label {
+	width: 100%;
+	display: block;
+	cursor: pointer;
+}
+
+/* aqui termina de escribir carlita los estilos del select */
 
 
 
@@ -187,6 +282,7 @@ tbody td:before {
   }
 
 }
+
 
 /* Sortable tables */
 table.sortable thead {
