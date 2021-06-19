@@ -1,0 +1,66 @@
+:root {
+  --primarycolor: #8685ef;
+  --secondarycolor: #ffffff;
+  --thirdcolor: #faf8ff;
+  --fourthcolor: #e3e0f3;
+  --contrastcolor: #ee6464;
+}
+.shape {
+  /* border-radius: 32px; */
+  background-color: var(--secondarycolor);
+  box-sizing: border-box;
+  color: black;
+  width: 150px;
+  height: 300px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  box-shadow: 2px 3px 2px 1px rgba(227, 224, 243, 0.25);
+  padding: auto;
+  text-align: center;
+  border-radius: 32px;
+  margin-left: 1px;
+}
+.shape p {
+  color: var(--primarycolor);
+}
+.shape p,
+h4 {
+  padding: 10px 20px 0 20px;
+  justify-content: center;
+}
+.shape img {
+  width: 100%;
+  height: 150px;
+}
+.shape h4 {
+  font-size: 16px;
+}
+.shape:hover {
+  cursor: pointer;
+  /* animation: scalecard 1s ease; */
+  background-color: #dbdbfa;
+}
+.content {
+  display: block;
+}
+@keyframes scalecard {
+  0% {
+    transform: scale3D(1, 1, 1);
+  }
+  100% {
+    transform: scale3D(1.3, 1.3, 1.3);
+  }
+}
+/* .button {
+  background-color: var(--primarycolor);
+  color: var(--secondarycolor);
+  border-radius: 32px;
+  border: none;
+  height: 30px;
+  transition: 0.7s;
+
+}
+.button:hover {
+  background-color: #706fa8;
+  cursor: pointer;
+} */

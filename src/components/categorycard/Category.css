@@ -1,0 +1,23 @@
+:root {
+  --primarycolor: #8685ef;
+  --secondarycolor: #ffffff;
+  --thirdcolor: #faf8ff;
+  --fourthcolor: #e3e0f3;
+  --contrastcolor: #ee6464;
+}
+
+.button {
+  width: 23%;
+  height: 60px;
+  border-radius: 32px;
+  transition: 0.7s;
+  margin: 10px 5px 10px 5px;
+  box-sizing: border-box;
+  background-color: var(--primarycolor);
+  color: var(--secondarycolor);
+  padding: 3px 0 0 0;
+}
+.button:hover {
+  background-color: #706fa8;
+  cursor: pointer;
+}
