@@ -35,10 +35,9 @@ export default function ModalCat(props) {
                 </button>
                 <div>
                     <div>
-                        <h1>Agregar nueva categoria</h1>
-                        <input className="" type="text" onChange={(e) => {setproductId(e.target.value);}} required/>
+                        <h1>Agregar nueva categoria</h1><br/>
                         <label>Ingrese la nueva categoria:</label>
-                        <input className="" type="number" onChange={(e) => {setPrice(e.target.value);}} />
+                        <input className="" type="string"/>
                     </div>
                     <button className="btn--cart" onClick={() => EditCart()}>
                             Agregar Categoria
