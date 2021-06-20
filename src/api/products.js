@@ -121,11 +121,11 @@ export default class DataProviderProducts extends Component {
             data: DATA,
         })
             .then((res) => {
-                 console.log(res);
-                 if (res.status === 201) {
-                     alert('orden recibida exitosamente',res.resp)
-                     this.removeTotal()
-                 }
+                console.log(res);
+                if (res.status === 201) {
+                    alert('orden recibida exitosamente',res.resp)
+                    this.removeTotal()
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -144,14 +144,35 @@ export default class DataProviderProducts extends Component {
             data: DATA,
         })
             .then((res) => {
-                 console.log(res);
-                 if (res.status === 200) {
-                     alert('producto agregado exitosamente')
-                 }
+                console.log(res);
+                if (res.status === 200) {
+                    alert('producto agregado exitosamente')
+                }
             })
             .catch((err) => {
                 console.log(err);
                 alert('algo ha sucedido, no se puedo agregar el producto')
+            });
+    }
+
+    addCategories = (token,category) => {
+        console.log('entro')
+        const DATA = {category};
+        axios({
+            method: "POST",
+            url: `https://marthacoffee.herokuapp.com/api/product/addCategory`,
+            headers: { "Authorization": `${token}` },
+            data: DATA,
+        })
+            .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                    alert('Categoria agregado exitosamente')
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert('algo ha sucedido, no se pudo agregar la Categoria')
             });
     }
 
@@ -220,10 +241,10 @@ export default class DataProviderProducts extends Component {
             data: {cedula: `${cedula}`, firstname: `${firstname}`,lastname: `${lastname}`, email: `${email}`   },
         })
             .then((res) => {
-                 console.log(res);
-                 if (res.status === 201) {
-                     alert('Cliente agregado exitosamente')
-                 }
+                console.log(res);
+                if (res.status === 201) {
+                    alert('Cliente agregado exitosamente')
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -268,11 +289,11 @@ export default class DataProviderProducts extends Component {
 
     render() {
         const { products, cart, total } = this.state;
-        const { addCart,removeProduct, getTotal, removeTotal, addProduct,deleteProduct,editProductprice,editProductquantity,reduction,increase,addOrder,NewUser } = this;
+        const { addCart,removeProduct,addCategories, getTotal, removeTotal, addProduct,deleteProduct,editProductprice,editProductquantity,reduction,increase,addOrder,NewUser } = this;
 
         return (
             <DataContext.Provider
-                value={{ products, cart, total,reduction,increase,addCart,removeProduct, getTotal, removeTotal,addProduct,deleteProduct,editProductprice,editProductquantity,addOrder,NewUser }}>
+                value={{ products, cart, total,addCategories,reduction,increase,addCart,removeProduct, getTotal, removeTotal,addProduct,deleteProduct,editProductprice,editProductquantity,addOrder,NewUser }}>
                 {this.props.children}
             </DataContext.Provider>
         )

@@ -7,19 +7,11 @@ import { DataContext } from '../../../api/products';
 export default function ModalCat(props) {
 
     const context = useContext(DataContext)
-    const [productId, setproductId] = useState("");
-    const [price, setPrice] = useState();
-    const [quantity, setQuantity] = useState();
+    const [category, setCategory] = useState();
 
-    const EditCart = () => {
+    const addCat = () => {
 
-        if(price !== null){
-            context?.editProductprice(window.localStorage.USER_KEY,productId, price);
-        }
-        if(quantity !== null){
-            context?.editProductquantity(window.localStorage.USER_KEY,productId,quantity );
-        }
-        
+        context?.addCategories(window.localStorage.USER_KEY,category);
         props.onClose();
     };
 
@@ -37,9 +29,9 @@ export default function ModalCat(props) {
                     <div>
                         <h1>Agregar nueva categoria</h1><br/>
                         <label>Ingrese la nueva categoria:</label>
-                        <input className="" type="string"/>
+                        <input className="" type="string" onChange={(e) => {setCategory(e.target.value);}}/>
                     </div>
-                    <button className="btn--cart" onClick={() => EditCart()}>
+                    <button className="btn--cart" onClick={() => addCat()}>
                             Agregar Categoria
                     </button>
                 </div>
