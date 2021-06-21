@@ -8,6 +8,7 @@ import { DataContext } from "../../api/products";
 import Modal from "./modal/ModalNewP";
 import ModalDelete from "./modal/ModalDelP";
 import ModalEdit from "./modal/ModalEditP";
+import ModalCat from "./modal/ModalNewCat";
 
 const ROLE = window.localStorage.getItem("ROLE");
 
@@ -16,6 +17,7 @@ export default class Storehouse extends Component {
     openModal: false,
     openModal2: false,
     openModal3: false,
+    openModal4:false,
   };
   componentDidMount() {
     // if (ROLE === Roles.CASHIER) {
@@ -32,12 +34,16 @@ export default class Storehouse extends Component {
     const handleOpenModal = () => {
       this.setState({ openModal: true });
     };
+    
     const handleOpenModal2 = () => {
       this.setState({ openModal2: true });
     };
     const handleOpenModal3 = () => {
       this.setState({ openModal3: true });
     };
+    const handleOpenModal4 = () => {
+      this.setState({ openModal4: true });
+    }
     const { products } = this.context;
     return (
       <div className="back">
@@ -58,6 +64,9 @@ export default class Storehouse extends Component {
                 </button>
                 <button className="btn btn1" onClick={() => handleOpenModal2()}>
                   Eliminar Producto
+                </button>
+                <button className="btn btn1" onClick={() => handleOpenModal4()}>
+                  Agregar Categorias
                 </button>
                 {/* <button className="btn btn1">Extra</button> */}
               </div>
@@ -121,6 +130,12 @@ export default class Storehouse extends Component {
         >
           Lorem
         </ModalEdit>
+        <ModalCat 
+        isOpen={this.state.openModal4}
+        onClose={()=> this.setState({openModal4:false})}
+        >
+          
+          </ModalCat>
       </div>
     );
   }

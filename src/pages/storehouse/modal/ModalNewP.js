@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./Modal.css";
 import { DataContext } from '../../../api/products';
+import axios from "axios"
 
 
 export default function Modal(props) {
-
     const context = useContext(DataContext)
 
     const [proname, setProname] = useState("");
@@ -13,20 +13,30 @@ export default function Modal(props) {
     const [quantity, setQuantity] = useState();
     const [category, setCategory] = useState("");
     const [image, setImage] = useState("");
+    const [respuestaAPI, setRespuestaAPI] = useState("");
 
     const handleClickModal = () => {
         // 'product1', '3000', '3','extra', 'https://bodegaeltrebol.com/wp-content/uploads/2018/12/aa-134.png'
         addToCart()
     }
+    const handleChangeSelect = (e) => {
+        console.log(e.target.value);
+        setCategory(e.target.value)
+    }
     const addToCart = () => {
         context?.addProduct(window.localStorage.USER_KEY, proname, price, quantity, category, image);
         props.onClose();
     };
+    useEffect(async () => {
+        const consulta = await axios( `https://marthacoffee.herokuapp.com/api/product/getCategory`);
+    
+        setRespuestaAPI(consulta.data.categories);
+        console.log(respuestaAPI,':)');
+    }, []);
 
     if (!props.isOpen) {
         return null;
     }
-
     return ReactDOM.createPortal(
         <div className="Modal">
             <div className="Modal__container">
@@ -35,15 +45,25 @@ export default function Modal(props) {
                 </button>
                 <div >
                     <h1>Agregar un nuevo producto</h1>
-                    <div className=''>
+                    <div className=''><br></br>
                         <label>Nombre del producto:</label>
                         <input className="" type="text" onChange={(e) => { setProname(e.target.value); }} required />
                         <label>Precio del producto:</label>
                         <input className="" type="number" onChange={(e) => { setPrice(e.target.value); }} required />
                         <label>Ingresa la cantidad existente del producto:</label>
                         <input className="" type="number" onChange={(e) => { setQuantity(e.target.value); }} required />
-                        <label>Ingrese la categoria del producto:</label>
-                        <input className="" type="text" onChange={(e) => { setCategory(e.target.value); }} required />
+                        <label>Selecciona categoria del producto:</label>
+                        {/* <input className=""> Seleccione caegoria</input> */}
+                        
+                        <select style={{background:' var(--primarycolor)', borderRadius:'5px', height:'30px', color:'#fff'}} className="" 
+                        name="Categorias" onChange={handleChangeSelect}>
+                            Categorias
+                            {
+                                respuestaAPI.map(element =>(
+                                <option key={element.categoryID}value={element.categoryid}>{element.categoryName}</option>
+                                ))
+                            }
+                        </select>
                         <label>Ingrese la imagen del producto:</label>
                         <input className="" type="text" placeholder='link/url' onChange={(e) => { setImage(e.target.value); }} required />
                         <input className="" type="file" disabled onChange={(e) => { setImage(e.target.value); }} required />
