@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./Modal.css";
 import { DataContext } from '../../../api/products';
+import axios from "axios"
 
 
 export default function Modal(props) {
-
     const context = useContext(DataContext)
 
     const [proname, setProname] = useState("");
@@ -13,6 +13,7 @@ export default function Modal(props) {
     const [quantity, setQuantity] = useState();
     const [category, setCategory] = useState("");
     const [image, setImage] = useState("");
+    const [respuestaAPI, setRespuestaAPI] = useState("");
 
     const handleClickModal = () => {
         // 'product1', '3000', '3','extra', 'https://bodegaeltrebol.com/wp-content/uploads/2018/12/aa-134.png'
@@ -22,11 +23,16 @@ export default function Modal(props) {
         context?.addProduct(window.localStorage.USER_KEY, proname, price, quantity, category, image);
         props.onClose();
     };
+    useEffect(async () => {
+        const consulta = await axios( `https://marthacoffee.herokuapp.com/api/product/getCategory`);
+    
+        setRespuestaAPI(consulta.data.categories);
+        console.log(respuestaAPI,':)');
+    });
 
     if (!props.isOpen) {
         return null;
     }
-
     return ReactDOM.createPortal(
         <div className="Modal">
             <div className="Modal__container">
@@ -47,11 +53,14 @@ export default function Modal(props) {
                         <details>
                         <summary>Categorias</summary>
                         <ul>
-                          <li>Item 1</li>
-                          <li>Item 2</li>
-                          <li>Item 3</li>
-                          <li>Item 4</li>
-                          <li>Item 5</li>
+                            <li>
+                            {
+                                respuestaAPI.map(element =>(
+                                <option key="categorias">{element.categoryName}</option>
+                                ))
+                            
+                            }
+                            </li>
                         </ul>
                         </details>
                         <input className="" type="text" onChange={(e) => { setCategory(e.target.value); }} required />

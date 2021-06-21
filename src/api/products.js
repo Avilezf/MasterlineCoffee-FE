@@ -8,6 +8,7 @@ export default class DataProviderProducts extends Component {
 
     state = {
         products: [],
+        category:  [],
         cart: [],
         total: 0
     };
@@ -283,6 +284,22 @@ export default class DataProviderProducts extends Component {
                 });
 
         } catch (err) {
+            console.error(err.message);
+        }
+
+        try {
+            axios({
+                method: "GET",
+                url: `https://marthacoffee.herokuapp.com/api/product/getCategory`,
+                headers: { "Authorization": `${window.localStorage.getItem("USER_KEY")}` },
+            }).then((res)=>{
+                this.setState({category:res.data.category});
+                return res;
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+        }catch(err){
             console.error(err.message);
         }
     };
