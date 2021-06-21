@@ -50,19 +50,19 @@ export default function Modal(props) {
                         <input className="" type="number" onChange={(e) => { setQuantity(e.target.value); }} required />
                         <label>Selecciona categoria del producto:</label>
                         {/* <input className=""> Seleccione caegoria</input> */}
-                        <details>
-                        <summary>Categorias</summary>
+                        
+                        <select name="Categorias" >
                         <ul>
                             <li>
                             {
                                 respuestaAPI.map(element =>(
-                                <option key="categorias">{element.categoryName}</option>
+                                <option key={element.categoryID}value={element.categoryid}>{element.categoryName}</option>
                                 ))
                             
                             }
                             </li>
                         </ul>
-                        </details>
+                        </select>
                         <input className="" type="text" onChange={(e) => { setCategory(e.target.value); }} required />
                         <label>Ingrese la imagen del producto:</label>
                         <input className="" type="text" placeholder='link/url' onChange={(e) => { setImage(e.target.value); }} required />
