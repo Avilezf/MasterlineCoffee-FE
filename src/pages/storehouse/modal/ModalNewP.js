@@ -19,6 +19,10 @@ export default function Modal(props) {
         // 'product1', '3000', '3','extra', 'https://bodegaeltrebol.com/wp-content/uploads/2018/12/aa-134.png'
         addToCart()
     }
+    const handleChangeSelect = (e) => {
+        console.log(e.target.value);
+        setCategory(e.target.value)
+    }
     const addToCart = () => {
         context?.addProduct(window.localStorage.USER_KEY, proname, price, quantity, category, image);
         props.onClose();
@@ -28,7 +32,7 @@ export default function Modal(props) {
     
         setRespuestaAPI(consulta.data.categories);
         console.log(respuestaAPI,':)');
-    });
+    }, []);
 
     if (!props.isOpen) {
         return null;
@@ -41,7 +45,7 @@ export default function Modal(props) {
                 </button>
                 <div >
                     <h1>Agregar un nuevo producto</h1>
-                    <div className=''>
+                    <div className=''><br></br>
                         <label>Nombre del producto:</label>
                         <input className="" type="text" onChange={(e) => { setProname(e.target.value); }} required />
                         <label>Precio del producto:</label>
@@ -51,16 +55,15 @@ export default function Modal(props) {
                         <label>Selecciona categoria del producto:</label>
                         {/* <input className=""> Seleccione caegoria</input> */}
                         
-                        <select className="" 
-                        name="Categorias">
+                        <select style={{background:' var(--primarycolor)', borderRadius:'5px', height:'30px', color:'#fff'}} className="" 
+                        name="Categorias" onChange={handleChangeSelect}>
+                            Categorias
                             {
                                 respuestaAPI.map(element =>(
                                 <option key={element.categoryID}value={element.categoryid}>{element.categoryName}</option>
                                 ))
-                            
                             }
                         </select>
-                        <input className="" type="text" onChange={(e) => { setCategory(e.target.value); }} required />
                         <label>Ingrese la imagen del producto:</label>
                         <input className="" type="text" placeholder='link/url' onChange={(e) => { setImage(e.target.value); }} required />
                         <input className="" type="file" disabled onChange={(e) => { setImage(e.target.value); }} required />
